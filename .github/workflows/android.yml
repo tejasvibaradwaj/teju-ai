@@ -36,7 +36,10 @@ jobs:
         run: |
           unzip -o *.zip
           PROJECT_DIR=$(find . -maxdepth 2 -name settings.gradle.kts -printf '%h\n' | head -1)
-          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
+          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV       - name: Enable AndroidX
+        run: |
+          echo "android.useAndroidX=true" >> "$PROJECT_DIR/gradle.properties"
+          echo "android.enableJetifier=true" >> "$PROJECT_DIR/gradle.properties"
 
       - name: Build APK
         run: |
